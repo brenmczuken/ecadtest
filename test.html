@@ -1,0 +1,53 @@
+<html>
+<head><title>Custom URL Protocol</title>
+<script src="jquery.js"></script>
+<script>
+var ecadstarInstalled = false;
+function seteCADSTARInstalled()
+{
+	ecadstarInstalled = true;
+}
+window.onload=function(){
+if(document.getElementById("ecadstar-test").complete)
+	{
+	alert("eCADSTARInstalled = " + ecadstarInstalled);
+	/*alert("appname=" + navigator.appName);
+	alert("appCodeName=" + navigator.appCodeName);
+	alert("platform=" + navigator.platform);
+	alert("appVersion=" + navigator.appVersion);*/
+	
+	}
+//document.getElementById("testeCADSTAR").src='ecadstarnot:design.pdes';
+}
+
+$(function() {
+    var timeIndex;
+    $("a[href*='ecadstarnot:']").blur(function(e)
+    {
+        clearTimeout(timeIndex);
+    });
+
+    $("a[href*='ecadstarnot:']").click(function(e)
+    {
+      var el = $(this);
+      timeIndex = setTimeout(function() {
+        document.location.href='error.html';
+      }, 500);
+
+      // once you do the custom-uri, it should properly execute the handler, otherwise, the settimeout that you set before will kick in
+      window.location = el.attr("href");
+      e.preventDefault();
+    });
+});
+</script>
+</head>
+<body>
+<p><a href="ecadstar:design.pdes">custom link ecadstar</a></p>
+<p><a href="eCADSTARFile:C:(bs)xampp(bs)htdocs(bs)portal(bs)custom-url(bs)testnotepad.txt">custom link notepad</a></p>
+<p><a href="eCADSTARFile:C:(bs)xampp(bs)htdocs(bs)portal(bs)custom-url(bs)Design1.pdes">custom link PCB</a></p>
+<p><a href="eCADSTARFile:C:(bs)testecadstar">Test for eCADSTAR</a></p>
+<p><a href="ecadstarnot:design.pdes">custom link no software</a></p>
+<img id="ecadstar-test" src="file:\\C:\Program Files\eCADSTAR\eCADSTAR 2021.0\images\eCADSTAR_lib.ico" style="display:none;" onload="seteCADSTARInstalled()">
+<iframe style="display:none;" src="" id="testeCADSTAR"></iframe>
+</body>
+</html>
