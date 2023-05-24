@@ -1,1 +1,1 @@
-(open-web filepath:"C:/Program Files (x86)/Ampps/www/batchmanufacturing/SlickGrid-master/examples/example15-auto-resize.html")
+changed
